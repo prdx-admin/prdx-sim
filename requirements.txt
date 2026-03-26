@@ -1,4 +1,7 @@
+# Install the package in editable mode: pip install -e .
+# Or install deps only:
 numpy>=1.21.0
 matplotlib>=3.5.0
 tqdm>=4.62.0
+scikit-learn>=1.0.0
 jupyter>=1.0.0
