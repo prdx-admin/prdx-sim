@@ -1,23 +1,6 @@
-"""PRDX / TON paradox economy agent-based simulation."""
+"""PARADOX protocol simulation: the contracts' pool and ticket, a population of players, figures."""
 
-from prdx_sim.agent import Agent, AgentProfile
-from prdx_sim.params import SystemParams
-from prdx_sim.profiles import DEFAULT_PROFILES
-from prdx_sim.simulation import Simulation, generate_ton_balance
-from prdx_sim.system import ParadoxMaster
-from prdx_sim.user import User
-from prdx_sim.wallets import InvestmentTracker, ParadoxWallet, TonWallet
+from prdx_sim.population import CLASSES, Dial, World, exit_all, make_world, run
+from prdx_sim.protocol import Master, Params, Ticket
 
-__all__ = [
-    "Agent",
-    "AgentProfile",
-    "DEFAULT_PROFILES",
-    "InvestmentTracker",
-    "ParadoxMaster",
-    "ParadoxWallet",
-    "Simulation",
-    "SystemParams",
-    "TonWallet",
-    "User",
-    "generate_ton_balance",
-]
+__all__ = ["CLASSES", "Dial", "Master", "Params", "Ticket", "World", "exit_all", "make_world", "run"]

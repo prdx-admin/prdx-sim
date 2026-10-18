@@ -5,14 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "prdx-sim"
 version = "0.1.0"
-description = "Agent-based simulation of the PARADOX (PRDX/TON) protocol; see prdx-docs for the specification"
+description = "Simulation of the PARADOX protocol on the contracts' own rules; see prdx-docs for the specification"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.21.0",
     "matplotlib>=3.5.0",
-    "tqdm>=4.62.0",
-    "scikit-learn>=1.0.0",
     "jupyter>=1.0.0",
 ]
 
