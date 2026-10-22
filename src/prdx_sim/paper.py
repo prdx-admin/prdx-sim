@@ -195,47 +195,58 @@ def _wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
 
 
 def fig_classes(rng, params: Params, out: Path) -> Path:
+    """Two models in two rows: the closed population of one year (statics) and the loop of four
+    years, where players arrive and leave (dynamics)."""
     from prdx_sim.population import CLASSES, class_of
 
-    pooled = ex.pooled_years(rng, params, players=20_000, seeds=100)
+    rows = (
+        ("statics, one year", ex.pooled_years(rng, params, players=20_000, seeds=100)),
+        (r"loop, four years", ex.pooled_loop(rng, params, seeds=20)),
+    )
     names = [r"Alice, $\rho=0$", r"$\rho\in(0,\,0.25]$", r"$\rho\in(0.25,\,0.5]$",
              r"$\rho\in(0.5,\,0.75]$", r"Bob, $\rho\in(0.75,\,1]$"]
-    fig, (ax, bx) = plt.subplots(1, 2, figsize=(sci.TWO_COL, 2.6),
-                                 gridspec_kw={"width_ratios": [1, 1.5]})
-    gains = pooled.gain_by_class.mean(axis=0)
-    vals = list(gains) + [-pooled.fees.mean(), -pooled.kept.mean()]
-    labels = names + ["mint fee", "burn fee"]
-    colours = sci.SERIES[: len(CLASSES)] + [sci.GREY, sci.GREY]
-    ys = np.arange(len(vals))[::-1]
-    ax.barh(ys, vals, color=colours, height=0.6)
-    ax.axvline(0, color=sci.INK, lw=0.6)
-    ax.set_yticks(ys)
-    ax.set_yticklabels(labels)
-    ax.tick_params(axis="y", length=0)
-    ax.xaxis.set_major_formatter(FuncFormatter(_pct))
-    ax.set_xlabel("gain, share of all money brought in")
-    total = np.abs(pooled.gain_by_class.sum(axis=1) + pooled.fees + pooled.kept).max()
-    assert total < 1e-12, f"money is not conserved: {total}"
-    ax.text(0.98, 0.04, "sum of bars = 0", transform=ax.transAxes, ha="right", fontsize=7)
-    sci.letter(ax, "a", "who pays whom")
+    fig, axes = plt.subplots(2, 2, figsize=(sci.TWO_COL, 5.0),
+                             gridspec_kw={"width_ratios": [1, 1.5]})
+    for r, (title, pooled) in enumerate(rows):
+        ax, bx = axes[r]
+        gains = pooled.gain_by_class.mean(axis=0)
+        vals = list(gains) + [-pooled.fees.mean(), -pooled.kept.mean()]
+        labels = names + ["mint fee", "burn fee"]
+        colours = sci.SERIES[: len(CLASSES)] + [sci.GREY, sci.GREY]
+        ys = np.arange(len(vals))[::-1]
+        ax.barh(ys, vals, color=colours, height=0.6)
+        ax.axvline(0, color=sci.INK, lw=0.6)
+        ax.set_yticks(ys)
+        ax.set_yticklabels(labels)
+        ax.tick_params(axis="y", length=0)
+        ax.xaxis.set_major_formatter(FuncFormatter(_pct))
+        ax.set_xlabel("gain, share of all money brought in")
+        ax.text(0.98, 0.03, "sum of bars = 0", transform=ax.transAxes, ha="right", va="bottom", fontsize=6.5)
+        total = np.abs(pooled.gain_by_class.sum(axis=1) + pooled.fees + pooled.kept).max()
+        assert total < 1e-9, f"money is not conserved: {total}"
+        sci.letter(ax, "ac"[r], f"who pays whom · {title}")
 
-    mult = pooled.final / pooled.start
-    cls = class_of(pooled.rho)
-    grid = np.logspace(-1.3, 1.3, 400)
-    for i in range(len(CLASSES)):
-        m = np.sort(mult[cls == i])
-        bx.plot(grid, np.searchsorted(m, grid, side="right") / m.size, color=sci.SERIES[i],
-                label=names[i])
-    bx.axvline(1, color=sci.INK, lw=0.6, ls=(0, (3, 2)))
-    bx.set_xscale("log")
-    bx.set_ylim(0, 1)
-    bx.xaxis.set_major_formatter(FuncFormatter(_mult))
-    bx.yaxis.set_major_formatter(FuncFormatter(_pct))
-    bx.set_xlabel("wealth at exit / wealth brought in")
-    bx.set_ylabel("share of participants at or below")
-    bx.legend(loc="lower right")
-    sci.letter(bx, "b", "outcomes by risk class")
-    fig.tight_layout(pad=0.4, w_pad=1.2)
+        mult = pooled.final / pooled.start
+        cls = class_of(pooled.rho)
+        # the axis runs to the largest multiple: the top tail is the large payouts, it is not cut
+        lo, hi = max(mult.min(), 1e-3), mult.max()
+        grid = np.logspace(np.log10(lo) - 0.05, np.log10(hi) + 0.05, 600)
+        for i in range(len(CLASSES)):
+            m = np.sort(mult[cls == i])
+            bx.plot(grid, np.searchsorted(m, grid, side="right") / m.size, color=sci.SERIES[i],
+                    label=names[i])
+            bx.plot([m[-1]], [1.0], "o", ms=2.5, color=sci.SERIES[i])
+        bx.axvline(1, color=sci.INK, lw=0.6, ls=(0, (3, 2)))
+        bx.set_xscale("log")
+        bx.set_ylim(0, 1.02)
+        bx.xaxis.set_major_formatter(FuncFormatter(_mult))
+        bx.yaxis.set_major_formatter(FuncFormatter(_pct))
+        bx.set_xlabel("wealth at exit / brought in; dot: the largest")
+        bx.set_ylabel("share at or below")
+        if r == 0:
+            bx.legend(loc="lower right")
+        sci.letter(bx, "bd"[r], f"outcomes by risk class · {title}")
+    fig.tight_layout(pad=0.4, w_pad=1.2, h_pad=1.0)
     return sci.save(fig, out, "fig-classes")
 
 

@@ -65,7 +65,7 @@ Many quantities of the protocol follow exactly from formulas. The simulation che
 | | `fig-price` | How the PRDX price grows as identical tickets are mined | exact law 1/(1 − 0.125·V/P₀); yearly runs of 10 000 participants compared with exp(0.125·Σ D/P) |
 | | `fig-how-much` | The yearly turnover T sets a participant's mean PRDX multiple, LVL sets the shape of the distribution | exact mean (1 − 0.125·T/24)^24; Monte Carlo of the distribution |
 | | `fig-numbers` | How the burned share 1 − ΣX/ΣD converges to 12.5 % as the number of tickets N grows; how the share of years with a falling PRDX price depends on the number of participants | Monte Carlo, 12.5 % ± 2σ/√N; 100–100 000 participants, Wilson intervals |
-| Population | `fig-classes` | Who pays whom: the gains of the risk classes sum to minus the fees; outcomes inside each class | 100 years of 20 000 participants |
+| Population | `fig-classes` | Who pays whom: the gains of the risk classes sum to minus the fees; outcomes inside each class, tails included | the closed population, 100 years of 20 000 participants; the loop, 20 runs of 4 years |
 | Dynamics | `fig-loop` | In the model, PRDX price growth attracts Alices and the top payout L·G attracts Bobs: a constant inflow of participants compared with the loop | entry and exit model, 20 runs of 4 years |
 | | `fig-phase` | For which (ε, r*) the loop settles, grows without bound or fades | 35 cells × 8 runs of 4 years; the free-entry border ε = 1 |
 | | `fig-shock-and-cap` | A payout of L·P and half the Alices leaving inside the loop; the limit L compared with the reserve and the deepest one-day price fall | paired runs, 40 pairs; 20 runs per value of L |

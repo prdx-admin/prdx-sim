@@ -121,6 +121,47 @@ def pooled_years(rng, params: Params, players: int = 10_000, seeds: int = 20, da
     )
 
 
+def pooled_loop(rng, params: Params, seeds: int = 20, days: int = 4 * 365, eps: float = 0.8):
+    """The same pooling as `pooled_years`, under the loop: players arrive and leave, every player
+    who ever took part counts with what they took (or would take leaving at the end)."""
+    rho, start, final = [], [], []
+    by_class, fees, kept, growth = [], [], [], []
+    for _ in range(seeds):
+        m = dyn.make_market(rng, params, dyn.Behaviour(eps=eps))
+        g0, p0 = 1e-6, m.price
+        dyn.run(m, rng, days)
+        growth.append(m.price / p0)
+        dyn.exit_all(m)
+        r, s0, f = dyn.outcomes(m)
+        money = s0.sum()
+        cls = pop.class_of(r)
+        by_class.append([(f - s0)[cls == i].sum() / money for i in range(len(pop.CLASSES))])
+        fees.append(m.fees_base / money)
+        kept.append((m.reserve - g0) / money)
+        rho.append(r)
+        start.append(s0)
+        final.append(f)
+    return Pooled(
+        np.concatenate(rho), np.concatenate(start), np.concatenate(final),
+        np.array(by_class), np.array(fees), np.array(kept), np.array(growth),
+    )
+
+
+def years_down_loop(rng, params: Params, eps=(0.5, 0.8, 1.2), seeds: int = 10, years: int = 4):
+    """Under the loop: the calendar years whose price ends below its start, out of all years run."""
+    down = total = 0
+    for e in eps:
+        for _ in range(seeds):
+            m = dyn.make_market(rng, params, dyn.Behaviour(eps=e))
+            p0 = m.price
+            dyn.run(m, rng, years * 365)
+            p = np.r_[p0, m.log["price"]]
+            for y in range(years):
+                down += p[(y + 1) * 365] < p[y * 365]
+                total += 1
+    return int(down), int(total)
+
+
 # ───────────────────────── Q8 growth against volume ─────────────────────────
 def growth_vs_volume(rng, params: Params, rates, players: int = 2000, seeds: int = 60,
                      days: int = 365):
