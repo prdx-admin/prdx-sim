@@ -1,17 +1,17 @@
 # Paradox ecosystem simulator
 
-Simulation of the [PARADOX](https://github.com/prdx-admin/prdx-docs) protocol on the contracts' own rules: PRDX backed by a reserve, MINT and BURN at G/P, and tickets — the right to mine. This repository is the simulation linked from the official docs.
+Simulation of the [PARADOX](https://prdxcoin.com) protocol on the contracts' own rules: PRDX backed by a reserve, MINT and BURN at G/P, and tickets — the right to mine. This repository is the simulation linked from the official docs.
 
 ## Official documentation
 
 Read the protocol specification first (fees, pricing, Mine mechanics, St. Petersburg paradox adaptation):
 
-| Language | Source |
-|----------|--------|
-| **English** | [en/docs.md](https://github.com/prdx-admin/prdx-docs/blob/main/en/docs.md) · [raw](https://raw.githubusercontent.com/prdx-admin/prdx-docs/main/en/docs.md) |
-| **Russian** | [ru/docs.md](https://github.com/prdx-admin/prdx-docs/blob/main/ru/docs.md) · [raw](https://raw.githubusercontent.com/prdx-admin/prdx-docs/main/ru/docs.md) |
+| Language | Website | Source |
+|----------|---------|--------|
+| **English** | [docs.prdxcoin.com/en](https://docs.prdxcoin.com/en/) | [en/docs.md](https://github.com/prdx-admin/prdx-docs/blob/main/en/docs.md) · [raw](https://raw.githubusercontent.com/prdx-admin/prdx-docs/main/en/docs.md) |
+| **Russian** | [docs.prdxcoin.com/ru](https://docs.prdxcoin.com/ru/) | [ru/docs.md](https://github.com/prdx-admin/prdx-docs/blob/main/ru/docs.md) · [raw](https://raw.githubusercontent.com/prdx-admin/prdx-docs/main/ru/docs.md) |
 
-Repository: [github.com/prdx-admin/prdx-docs](https://github.com/prdx-admin/prdx-docs).
+[Website](https://prdxcoin.com) · [App](https://app.prdxcoin.com) · [Documentation](https://docs.prdxcoin.com/en/) · [Documentation source](https://github.com/prdx-admin/prdx-docs)
 
 **How this repo relates to the contracts.** `src/prdx_sim/protocol.py` follows prdx-contracts in floating point: the pool moves the reserve G and the supply P, MINT and BURN keep G/P, and a ticket (a position) parks its deposit at open, burns it at activation and mints its payout at settlement. Admission is MAX ≤ L·P; RESHAPE, CANCEL (RTP · D back) and DRAWS are modelled. Defaults are the values of the testnet masters deployed on 2026-10-10: fees 16/1024, RTP 896/1024, L 128/1024, minimum entry 1 PRDX, opening price 1 base coin = 100 PRDX. A ticket whose entry falls under 1 PRDX steps its LVL down until it clears the floor (RESHAPE), or is not bought. The 24-hour grace period is not modelled: every ticket is revealed. Integer floors are left out.
 
