@@ -2,7 +2,7 @@
 
 The simulator runs the [PARADOX](https://prdxcoin.com) protocol on the rules of its contracts: PRDX backed by a reserve, MINT and BURN at the price G/P, and tickets for mining PRDX. The simulator's figures appear in the [protocol documentation](https://docs.prdxcoin.com/en/).
 
-[Website](https://prdxcoin.com) · [App](https://app.prdxcoin.com) · [Documentation](https://docs.prdxcoin.com/en/) · [Documentation source](https://github.com/prdx-admin/prdx-docs)
+[Website](https://prdxcoin.com) · [App](https://app.prdxcoin.com) · [Documentation](https://docs.prdxcoin.com/en/) · [Documentation source](https://github.com/prdx-admin/prdx-docs) · [X](https://x.com/prdxdeveloper)
 
 ## Protocol documentation
 
