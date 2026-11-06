@@ -45,3 +45,6 @@ venv.bak/
 
 # the docs embed these
 !figures/*.png
+
+# macOS
+.DS_Store
