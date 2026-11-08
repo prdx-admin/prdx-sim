@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """Figure style for the docs: a journal figure, not a dashboard.
 
 The app's monospace (Atkinson Hyperlegible Mono, fonts/), Greek from DejaVu Sans Mono and STIX

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """Figures in the journal style (`sci.py`). Captions: figures/README.md.
 
 python -m prdx_sim.paper [outdir] [names...]

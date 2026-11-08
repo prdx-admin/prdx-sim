@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """The protocol with the feedback loop: players come and go by what the protocol shows them.
 
 Alices compare the trailing price growth y with an outside yield r*. They arrive faster and

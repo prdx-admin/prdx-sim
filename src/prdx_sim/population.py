@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """A population of players on the protocol, vectorised over players.
 
 Each player has a risk profile rho in [0, 1]. rho = 0 is Alice: she mints and holds. As rho grows,

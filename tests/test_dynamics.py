@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 import numpy as np
 
 from prdx_sim.dynamics import Behaviour, exit_all, make_market, run

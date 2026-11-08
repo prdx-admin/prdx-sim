@@ -67,9 +67,9 @@ of the model to the app ourselves.
 
 ## License of contributions
 
-The Work is under the [PRDX License 1.1](LICENSE). Its section 3 covers contributions: a patch
-you send may be used by prdx-admin, the copyright holder, for any purpose. There is nothing to
-sign.
+A contribution is accepted under the licenses of this repository: code under the
+[MIT license](LICENSE), figures and texts under [CC BY 4.0](LICENSE-CC-BY-4.0). There is
+nothing to sign.
 
 ## Discussion
 

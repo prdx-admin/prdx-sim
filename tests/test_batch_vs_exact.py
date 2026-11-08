@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """The vectorised day admits a day's tickets against the supply at the start of the day; the
 contract admits them one by one. Over many years the two must give the same distribution."""
 

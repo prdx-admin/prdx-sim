@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """Contract-faithful core: the master's pool (G, P) and the ticket (a position NFT).
 
 Mirrors prdx-contracts `contracts/master/pool.tolk`, `master/collection.tolk` and

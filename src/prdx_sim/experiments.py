@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """The numbers behind the figures (paper.py). Pure numpy; every function takes its own rng.
 
 identical tickets      players by payout, the price under a stream of the same ticket

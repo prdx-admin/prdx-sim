@@ -10,4 +10,4 @@
 
 <!-- The test that covers the change. -->
 
-By sending this pull request, I grant the license of section 3 of [LICENSE](https://github.com/prdx-admin/prdx-sim/blob/main/LICENSE).
+By sending this pull request, I license it under the licenses of this repository: MIT for code, CC BY 4.0 for figures and texts.

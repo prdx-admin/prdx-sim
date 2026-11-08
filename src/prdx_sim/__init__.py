@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 prdx-admin
 """PARADOX protocol simulation: the contracts' pool and ticket, a population of players, figures."""
 
 from prdx_sim.population import CLASSES, Dial, World, exit_all, make_world, run
