@@ -1,0 +1,5 @@
+# Install the package in editable mode: pip install -e .
+# Or install deps only:
+numpy>=1.21.0
+matplotlib>=3.5.0
+jupyter>=1.0.0
